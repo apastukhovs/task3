@@ -1,6 +1,6 @@
 <?
 class Sql {
-   protected $query;
+   protected $my_sql;
    protected $table;
    protected $fields;
    protected $condition;
@@ -10,7 +10,7 @@ class Sql {
    private $link;
 
    function __construct() {
-    $this->query = '';
+    $this->my_sql->query('SET NAMES utf8');
     $this->table = '';;
     $this->fields = [];
     $this->errors = [];
@@ -99,17 +99,19 @@ public function getLimit()
   }
 
 
-/*protected function select() {
-    
+protected function select() {
+      
     $this->query = "SELECT ".$this->getField()." 
     FROM ".$this->getTable()." 
     WHERE ".$this->getCondition()." 
     LIMIT ".$this->getLimit()"
     ";    
-    $res = mysql_query($query);
-    return($res);*/
+    $result = $this->my_sql->query($query);
+    if ($this->my_sql->error) {
+      return(false);
+    }
+    $arr = array();
+     while ($row = $result->fetch_assoc())
+        $arr[] = $row;
+    return $arr; 
 }
-
-
-class 
-
