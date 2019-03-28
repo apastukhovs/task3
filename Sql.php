@@ -101,7 +101,7 @@ public function getLimit()
 
 protected function select() {
       
-    $this->query = "SELECT ".$this->getField()." 
+    $this->query = "SELECT ".implode(', ',$this->getField())." 
     FROM ".$this->getTable()." 
     WHERE ".$this->getCondition()." 
     LIMIT ".$this->getLimit()"
