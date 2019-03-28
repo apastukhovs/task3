@@ -20,7 +20,7 @@ class Sql {
     $this->values= '';
    }
 
-public function setFields($fields) {
+public function setField($fields) {
     $fields = trim($fields);
     if ($fields != '*' && $fields)
     {
@@ -30,7 +30,7 @@ public function setFields($fields) {
     return false;
   }
 
-public function getFields() {
+public function getField() {
     return $this->fields;
    }
 
@@ -44,7 +44,7 @@ public function setTable($table) {
     return false;
   }
  
-public function getTables(){
+public function getTable(){
     return $this->table;
 }
 
