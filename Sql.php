@@ -115,3 +115,40 @@ protected function select() {
         $arr[] = $row;
     return $arr; 
 }
+   
+   
+protected function insert($table, $object) {
+   $fields = array();
+   $values = array();
+   
+   foreach ($object as $column => $value)
+      {
+        $fields = $this->mysqli->real_escape_string($fields);
+        $fields[] = "`$field`";
+        if ($value === NULL)
+        {
+          $values[] = "''";
+        }
+        else
+        {
+          $value = $this->mysql->real_escape_string($value);	
+          $values[] = "'$value'";
+        }
+      }
+	  
+      $fields_s = implode(', ', $fields);
+      $values_s = implode(', ', $values); 	
+      $sql = 
+        "INSERT INTO `%s` (%s) 
+         VALUES (%s)";
+      $query = sprintf($sql,
+      $this->mysql->real_escape_string($table),
+                        $columns_s,
+                        $values_s);
+	$result = $this->mysqli->query($query);
+      if ($this->mysqli->error) {
+		return (false);
+	  }
+      return $this->mysqli->insert_id;
+    } 
+}
