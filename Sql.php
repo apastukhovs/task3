@@ -1,5 +1,4 @@
 <?
-
 class Sql {
    protected $query;
    protected $table;
@@ -18,51 +17,99 @@ class Sql {
     $this->limit = '1';
     $this->condition = '';
     $this->link = $link;
+    $this->values= '';
    }
 
-
-
-   public function setFields() {
-    if ($fields!="" && $fields!="*" ){
-        array_push($this->fields, $fields);
+public function setFields($fields) {
+    $fields = trim($fields);
+    if ($fields != '*' && $fields)
+    {
+      array_push($this->fields, $fields);
+      return true;
     }
-    else return(false);
+    return false;
+  }
+
+public function getFields() {
+    return $this->fields;
    }
 
-   public function getFields() {
-       return $this->fields;
-   }
-
-   public function setTable() {
-    if ($table!="" && $table!="*" ){
-        array_push($this->table, $table);
+public function setTable($table) {
+    $table = trim($table);
+    if ($table != '*' && $table)
+    {
+      array_push($this->tableSql, $table);
+      return true;
     }
-    else return(false);
+    return false;
+  }
+ 
+public function getTables(){
+    return $this->table;
+}
+
+public function setData($values) {
+    if ($values!="") {
+        array_push($this->values, $values);
+        return true;
     }
+    else {
+        return(false);
+    }
+}
+
+public function getData() {
+    return $this->values;
+}
+
+public function setCondition($condition) {
+    $condition = trim($condition);
+    if ($condition != '*' && $condition)
+        {
+            array_push($this->condition, $condition);
+            return true;
+        }
+     return false;
    }
 
-   public function getTables(){
-       return $this->table;
+
+public function getCondition() {
+     return $this->$condition;
    }
 
-   protected function select() {
+public function setLimit($limit) 
+   {
+     $limit = trim($limit);
+     if ($limit != '*' && $limit)
+     {
+       array_push($this->limit, $limit);
+       return true;
+     }
+     return false;
+   }   
+
+
+public function getLimit() 
+  {
+    if ($this->limit) 
+    {
+      return $this->limit;
+    }
+    return false;
+  }
+
+
+/*protected function select() {
     
-    $this->query = "SELECT $fields FROM $table WHERE $condition";
-    return($query);
-   }
-   protected function insert(){
-       
-    $this->values = array_map('mysql_real_escape_string', array_values($inserts));
-    $this->keys = array_keys($inserts);   
-    $this->query = ;
-    return($query);
+    $this->query = "SELECT ".$this->getField()." 
+    FROM ".$this->getTable()." 
+    WHERE ".$this->getCondition()." 
+    LIMIT ".$this->getLimit()"
+    ";    
+    $res = mysql_query($query);
+    return($res);*/
 }
-    protected function update(){
-        $this->query = "SELECT $fields FROM $tables WHERE $condition";
-        return($query);
-    }
-    protected function delete(){
-        $this->query = "SELECT $fields FROM $tables WHERE $condition";
-        return($query);
-    }
-}
+
+
+class 
+
