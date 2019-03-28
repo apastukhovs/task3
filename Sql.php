@@ -38,7 +38,7 @@ public function setTable($table) {
     $table = trim($table);
     if ($table != '*' && $table)
     {
-      array_push($this->tableSql, $table);
+      array_push($this->table, $table);
       return true;
     }
     return false;
