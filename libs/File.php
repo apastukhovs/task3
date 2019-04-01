@@ -82,30 +82,21 @@ class File
 	}
 	public function getFileContent($fileName) {
 		if(file_exists($fileName)){
-			if(0644 === ( fileperms($fileName) & 0644 )){
-				$content = file($fileName);
+			$content = file($fileName);
 				return $content;
-			} else {
-				return false;
-			}
-		} else {
+			}  else {
 			return false;
 		}
 	}
 	public function saveChanges($fileName){
 		$content = $this->changedData;
-		if(0777 === ( fileperms($fileName) & 0777 )){
-			$result = file_put_contents($fileName, $content);
+		$result = file_put_contents($fileName, $content);
 			if($result){
 				return true;
 			} else {
 				return false;
 			}
-		} else {
-			return false;
 		}
-		
-	}
 	
 	function mbStringToArray($string, $encoding = 'UTF-8') {
 		$arr = array();
